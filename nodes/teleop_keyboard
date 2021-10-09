@@ -131,8 +131,8 @@ def checkAngularLimitVelocity(vel):
 
     return vel
 
-def lpf2stop(rk,xk,tStop=np.array([0.1])):
-    tau=tStop/3
+def lpf(rk,xk,T=np.array([0.1])):
+    tau=T/3
     e=rk-xk
     xkp1=xk+e/tau*DT #integrate
 
@@ -171,7 +171,7 @@ if __name__=="__main__":
                 status = status + 1
                 print(vels(target_linear_vel,target_angular_vel))
             else :
-              target_angular_vel=lpf2stop(0,target_angular_vel) #returns the angular vel to zero slowly
+              target_angular_vel=lpf(0,target_angular_vel) #returns the angular vel to zero slowly
               if target_angular_vel != 0.0: 
                 print(vels(target_linear_vel,target_angular_vel))
 
